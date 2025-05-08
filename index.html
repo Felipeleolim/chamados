@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LM2 - Gestão de Chamados TI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://via.placeholder.com/150x50?text=LM2+Logo" alt="LM2 Soluções Tecnológicas" class="logo">
+            <h1>Gestão de Chamados de TI</h1>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" data-tab="empresas">Empresas</button>
+            <button class="tab" data-tab="anotacoes">Anotações</button>
+            <button class="tab" data-tab="relatorios">Relatórios</button>
+        </div>
+        
+        <!-- Aba de Empresas -->
+        <div id="empresas" class="tab-content active">
+            <div class="form-container">
+                <h2><i class="icon-building"></i> Cadastro de Empresas</h2>
+                
+                <div class="form-group">
+                    <label for="empresa-nome">Nome da Empresa:</label>
+                    <input type="text" id="empresa-nome" placeholder="Digite o nome da empresa">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="empresa-contato">Contato:</label>
+                        <input type="text" id="empresa-contato" placeholder="Nome do contato">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="empresa-telefone">Telefone:</label>
+                        <input type="text" id="empresa-telefone" placeholder="(00) 0000-0000">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="empresa-email">E-mail:</label>
+                    <input type="email" id="empresa-email" placeholder="contato@empresa.com">
+                </div>
+                
+                <button class="btn-primary" id="btn-adicionar-empresa">
+                    <i class="icon-plus"></i> Adicionar Empresa
+                </button>
+            </div>
+            
+            <div class="table-container">
+                <h3><i class="icon-list"></i> Empresas Cadastradas</h3>
+                <table id="tabela-empresas">
+                    <thead>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Contato</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-empresas">
+                        <!-- Empresas serão adicionadas aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Aba de Anotações -->
+        <div id="anotacoes" class="tab-content">
+            <div class="form-container">
+                <h2><i class="icon-edit"></i> Nova Anotação</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="mes-ano">Mês/Ano:</label>
+                        <input type="month" id="mes-ano">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="anotacao-data">Data:</label>
+                        <input type="date" id="anotacao-data">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="anotacao-empresa">Empresa:</label>
+                    <select id="anotacao-empresa">
+                        <option value="">Selecione uma empresa</option>
+                        <!-- Opções serão preenchidas via JavaScript -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="anotacao-titulo">Título do Chamado:</label>
+                    <input type="text" id="anotacao-titulo" placeholder="Breve descrição do chamado">
+                </div>
+                
+                <div class="form-group">
+                    <label for="anotacao-descricao">Descrição:</label>
+                    <textarea id="anotacao-descricao" rows="5" placeholder="Detalhes do chamado"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="anotacao-status">Status:</label>
+                    <select id="anotacao-status">
+                        <option value="pendente">Pendente</option>
+                        <option value="em-andamento">Em Andamento</option>
+                        <option value="concluido">Concluído</option>
+                    </select>
+                </div>
+                
+                <button class="btn-primary" id="btn-salvar-anotacao">
+                    <i class="icon-save"></i> Salvar Anotação
+                </button>
+            </div>
+            
+            <div class="table-container">
+                <h3><i class="icon-clipboard"></i> Anotações do Mês</h3>
+                <table id="tabela-anotacoes">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Empresa</th>
+                            <th>Título</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-anotacoes">
+                        <!-- Anotações serão adicionadas aqui via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Aba de Relatórios -->
+        <div id="relatorios" class="tab-content">
+            <div class="report-container">
+                <h2><i class="icon-chart"></i> Relatórios</h2>
+                
+                <div class="report-filters">
+                    <div class="form-group">
+                        <label for="report-periodo">Período:</label>
+                        <select id="report-periodo">
+                            <option value="7">Últimos 7 dias</option>
+                            <option value="30" selected>Últimos 30 dias</option>
+                            <option value="90">Últimos 3 meses</option>
+                            <option value="custom">Personalizado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="custom-date-range" style="display: none;">
+                        <label for="report-data-inicio">De:</label>
+                        <input type="date" id="report-data-inicio">
+                        
+                        <label for="report-data-fim">Até:</label>
+                        <input type="date" id="report-data-fim">
+                    </div>
+                    
+                    <button class="btn-secondary" id="btn-gerar-relatorio">
+                        <i class="icon-refresh"></i> Gerar Relatório
+                    </button>
+                </div>
+                
+                <div class="report-results">
+                    <div class="report-card">
+                        <h3>Chamados por Status</h3>
+                        <div id="chart-status" class="chart-container">
+                            <!-- Gráfico será renderizado aqui via JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="report-card">
+                        <h3>Chamados por Empresa</h3>
+                        <div id="chart-empresas" class="chart-container">
+                            <!-- Gráfico será renderizado aqui via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
